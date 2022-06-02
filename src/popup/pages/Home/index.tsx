@@ -1,29 +1,50 @@
-import 'windi.css'
+import 'windi.css';
 
-import { Avatar, Button, Col, Input, Row, Tabs } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Avatar, Button, Col, Input, Row, Tabs } from 'antd';
+import axios, { AxiosResponse } from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { LoginOutlined, UserOutlined } from '@ant-design/icons'
+import { LoginOutlined, UserOutlined } from '@ant-design/icons';
 
-import { data } from './DataSource'
-import styles from './index.module.less'
+import { data } from './DataSource';
+import styles from './index.module.less';
 
 const { TabPane } = Tabs
 
 const Home = () => {
   const navigate = useNavigate()
-  const [isLogin, setIsLogin] = useState(false)
   const [text, setText] = useState<string>('')
-  const [name, setName] = useState<string>('')
+  const [userName, setUserName] = useState<string>()
 
   useEffect(() => {
     // 读取数据，第一个参数是指定要读取的key以及设置默认值
     chrome.storage.sync.get({ username: '', password: '' }, function (items) {
-      setName(items.username)
-      setIsLogin(items.username ? true : false)
+      setUserName(items.username)
       console.log(items.username, items.password)
     })
+  }, [])
+
+  function getUserInfo() {
+    axios
+      .get('http://test-gw.newrank.cn:18080/api/nr-trade-security/xdnphb/adinsight/security/user/getUserInfo', {
+        headers: {
+          'n-token': '342bdbf6864146f59730fbd6eace18f9',
+        },
+      })
+      .then(function ({ data }) {
+        console.log(data)
+        if (!data?.data) {
+          setUserName(undefined)
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  useEffect(() => {
+    getUserInfo()
   }, [])
 
   function sendMessageToContentScript(message: any, callback: (response: any) => void) {
@@ -51,7 +72,7 @@ const Home = () => {
 
   return (
     <div className={styles.tabsWarper}>
-      {isLogin ? (
+      {userName ? (
         <Tabs centered className="h-[100%]">
           <TabPane tab="工具" key="1">
             <div className="p-10px" onClick={handleLink}>
@@ -70,10 +91,10 @@ const Home = () => {
               <Button
                 type="primary"
                 onClick={() => {
-                  chrome.runtime.openOptionsPage()
-                  // chrome.tabs.update({
-                  //   url: "chrome://extensions/?options=" + chrome.runtime.id,
-                  // })
+                  // chrome.runtime.openOptionsPage()
+                  chrome.tabs.create({
+                    url: 'chrome-extension://' + chrome.runtime.id + '/options.html',
+                  })
                 }}
               >
                 打开Options
@@ -92,13 +113,13 @@ const Home = () => {
             <div className="h-[100%] flex flex-col">
               <div className="flex-1 ml-14px">
                 <Avatar icon={<UserOutlined />} />
-                <span>{name}</span>
+                <span>{userName}</span>
               </div>
               <div
                 className="text-center h-50px cursor-pointer"
                 onClick={() => {
                   chrome.storage.sync.remove('username', function () {
-                    setIsLogin(false)
+                    setUserName(undefined)
                   })
                 }}
               >
@@ -115,7 +136,10 @@ const Home = () => {
             <Button
               type="primary"
               onClick={() => {
-                navigate('/login')
+                chrome.tabs.create({
+                  url: `https://www.newrank.cn/user/login?backUrl=${encodeURIComponent(window.location.href)}`,
+                })
+                // navigate('/login')
               }}
             >
               登录
