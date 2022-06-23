@@ -19,9 +19,16 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["js/vendor.js", "js/content_script.js"],
-      "css": ["content.css"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/vendor.js",
+        "js/content_script.js"
+      ],
+      "css": [
+        "content.css"
+      ],
       "run_at": "document_start"
     }
   ],
@@ -32,6 +39,9 @@
     "storage", // 插件本地存储
     "contextMenus", // 右键菜单
     "tabs", // 标签
-    "notifications" // 通知
+    "notifications", // 通知
+    "cookies",
+    "http://*/*",
+    "https://*/*"
   ]
 }

@@ -1,7 +1,7 @@
 import 'windi.css';
 
-import { Avatar, Button, Col, Input, Row, Tabs } from 'antd';
-import axios, { AxiosResponse } from 'axios';
+import { Avatar, Button, Col, Input, Row, Tabs, Space } from 'antd';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,11 +11,30 @@ import { data } from './DataSource';
 import styles from './index.module.less';
 
 const { TabPane } = Tabs
+const backUrl = 'http:///test.e.newrank.cn/feed/dashboard'
 
 const Home = () => {
   const navigate = useNavigate()
   const [text, setText] = useState<string>('')
   const [userName, setUserName] = useState<string>()
+  const [headImgUrl, setHeadImgUrl] = useState<string>()
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('这是 popup中的 DOMContentLoaded')
+    chrome.tabs.query({ 'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT },
+      function (tabs) {
+        const url = new URL(tabs[0].url || '')
+        chrome.cookies.getAll({
+          domain: url.host
+        }, (cookies) => {
+          const cs = cookies.map(c => c.name + "=" + c.value).join(';')
+          console.log(`cookies=`, cookies);
+
+        })
+      }
+    );
+  })
 
   useEffect(() => {
     // 读取数据，第一个参数是指定要读取的key以及设置默认值
@@ -34,8 +53,9 @@ const Home = () => {
       })
       .then(function ({ data }) {
         console.log(data)
-        if (!data?.data) {
-          setUserName(undefined)
+        if (data?.data) {
+          setUserName(data.data?.nickName)
+          setHeadImgUrl(data.data.headImgUrl)
         }
       })
       .catch(function (error) {
@@ -112,8 +132,10 @@ const Home = () => {
           <TabPane tab="设置" key="3" className="h-[100%]">
             <div className="h-[100%] flex flex-col">
               <div className="flex-1 ml-14px">
-                <Avatar icon={<UserOutlined />} />
-                <span>{userName}</span>
+                <Space>
+                  <Avatar src={headImgUrl} icon={<UserOutlined />} />
+                  <span>{userName}</span>
+                </Space>
               </div>
               <div
                 className="text-center h-50px cursor-pointer"
@@ -137,9 +159,8 @@ const Home = () => {
               type="primary"
               onClick={() => {
                 chrome.tabs.create({
-                  url: `https://www.newrank.cn/user/login?backUrl=${encodeURIComponent(window.location.href)}`,
+                  url: `http://test.main.newrank.cn/user/login?displayType=login&backUrl=${backUrl}&source=130&type=121&scene=adinsight_login`,
                 })
-                // navigate('/login')
               }}
             >
               登录
