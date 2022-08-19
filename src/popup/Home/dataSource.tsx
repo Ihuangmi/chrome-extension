@@ -1,7 +1,16 @@
+import React from "react";
+import juejinIcon from './imgs/juejin.svg'
+import baiduIcon from './imgs/baidu.png'
+import githubIcon from './imgs/github.png'
+import newrankIcon from './imgs/newrank.png'
+import npmIcon from './imgs/npm.png'
+
+
 export const data = [
   {
     label: '百度',
     url: 'https://www.baidu.com',
+    icon: baiduIcon,
   },
   {
     label: '谷歌翻译',
@@ -10,14 +19,17 @@ export const data = [
   {
     label: 'Github',
     url: 'https://github.com/',
+    icon: githubIcon,
   },
   {
     label: 'npm',
     url: 'https://www.npmjs.com/package/package',
+    icon: npmIcon,
   },
   {
     label: '掘金',
     url: 'https://juejin.cn/',
+    icon: juejinIcon,
   },
   {
     label: '新榜',
@@ -54,14 +66,17 @@ export const data = [
   {
     label: '团队语雀',
     url: 'https://newrank.yuque.com/dashboard',
+    icon: newrankIcon,
   },
   {
     label: '前端知识库',
     url: 'https://newrank.yuque.com/nrcd/hpdymk/mco139',
+    icon: newrankIcon,
   },
   {
     label: '有赚前端文档',
     url: 'https://newrank.yuque.com/youzuan/cg9l7r/zhp3b5',
+    icon: newrankIcon,
   },
   {
     label: 'Vite',

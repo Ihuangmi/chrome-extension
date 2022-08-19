@@ -1,39 +1,34 @@
-import 'windi.css';
+import 'windi.css'
 
-import { Avatar, Button, Col, Input, Row, Tabs, Space } from 'antd';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { LoginOutlined, UserOutlined } from '@ant-design/icons';
-
-import { data } from './DataSource';
-import styles from './index.module.less';
+import { Avatar, Button, Col, Input, Row, Tabs, Space } from 'antd'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { LoginOutlined, UserOutlined } from '@ant-design/icons'
+import { data } from './dataSource'
+import styles from './index.module.less'
 
 const { TabPane } = Tabs
 const backUrl = 'http:///test.e.newrank.cn/feed/dashboard'
 
 const Home = () => {
-  const navigate = useNavigate()
   const [text, setText] = useState<string>('')
   const [userName, setUserName] = useState<string>()
   const [headImgUrl, setHeadImgUrl] = useState<string>()
 
-
   document.addEventListener('DOMContentLoaded', () => {
     console.log('这是 popup中的 DOMContentLoaded')
-    chrome.tabs.query({ 'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT },
-      function (tabs) {
-        const url = new URL(tabs[0].url || '')
-        chrome.cookies.getAll({
-          domain: url.host
-        }, (cookies) => {
-          const cs = cookies.map(c => c.name + "=" + c.value).join(';')
-          console.log(`cookies=`, cookies);
-
-        })
-      }
-    );
+    chrome.tabs.query({ active: true, windowId: chrome.windows.WINDOW_ID_CURRENT }, function (tabs) {
+      const url = new URL(tabs[0].url || '')
+      chrome.cookies.getAll(
+        {
+          domain: url.host,
+        },
+        (cookies) => {
+          const cs = cookies.map((c) => c.name + '=' + c.value).join(';')
+          console.log(`cookies=`, cookies)
+        },
+      )
+    })
   })
 
   useEffect(() => {
@@ -98,8 +93,11 @@ const Home = () => {
             <div className="p-10px" onClick={handleLink}>
               <Row>
                 {data.map((item) => (
-                  <Col key={item.url} span={6} className="mb-8px font-bold">
-                    <a>{item.label}</a>
+                  <Col key={item.url} span={8} className="mb-8px font-bold">
+                    <a className={styles.itemBox}>
+                      <img src={item?.icon} alt="" />
+                      <span>{item.label}</span>
+                    </a>
                   </Col>
                 ))}
               </Row>

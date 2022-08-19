@@ -5,8 +5,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter, Outlet, Route, Routes } from 'react-router-dom'
 
-import Home from './pages/home'
-import Login from './pages/login'
+import Home from './home'
+import Login from './login'
+
 
 const Popup = () => {
   return (
