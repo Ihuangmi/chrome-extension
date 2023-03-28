@@ -4,82 +4,53 @@ import baiduIcon from './imgs/baidu.png'
 import githubIcon from './imgs/github.png'
 import newrankIcon from './imgs/newrank.png'
 import npmIcon from './imgs/npm.png'
+import deeplIcon from './imgs/DeepL_Logo_darkBlue_v2.svg'
 
 export const data = [
   {
     label: 'google',
     url: 'https://www.google.com/?hl=zh-CN',
+    icon: 'https://www.google.com/favicon.ico',
   },
   {
     label: '百度',
     url: 'https://www.baidu.com',
-    icon: baiduIcon,
+    icon: 'https://www.baidu.com/favicon.ico',
   },
   {
-    label: '谷歌翻译',
-    url: 'https://translate.google.cn/?sl=auto&tl=zh-CN&text=Mentor&op=translate',
+    label: '必应搜索',
+    url: 'https://www.bing.com/?scope=web&cc=HK&FORM=ANNTH1&pc=CNNDDB',
+    icon: 'https://img-s.msn.cn/tenant/amp/entityid/BB12cKGd?w=16&h=0&q=60&m=6&f=png&u=t',
+  },
+  {
+    label: 'DeepL 翻译',
+    url: 'https://www.deepl.com/translator#en/zh/no%20use%20promise.finally%20for%20compatibility',
+    icon: 'https://static.deepl.com/img/favicon/favicon_32.png',
   },
   {
     label: 'Github',
     url: 'https://github.com/',
-    icon: githubIcon,
+    icon: 'https://github.com/favicon.ico',
   },
   {
     label: 'npm',
     url: 'https://www.npmjs.com/package/package',
-    icon: npmIcon,
+    icon: 'https://static.npmjs.com/b0f1a8318363185cc2ea6a40ac23eeb2.png',
   },
   {
     label: '掘金',
     url: 'https://juejin.cn/',
-    icon: juejinIcon,
+    icon: 'https://juejin.cn/favicon.ico',
+  },
+  {
+    label: '语雀',
+    url: 'https://www.yuque.com/dashboard',
+    icon: 'https://mdn.alipayobjects.com/huamei_0prmtq/afts/img/A*vMxOQIh4KBMAAAAAAAAAAAAADvuFAQ/original',
   },
   {
     label: '新榜',
     url: 'https://www.newrank.cn',
-  },
-  {
-    label: '新榜有赚',
-    url: 'https://a.newrank.cn/center/#/user/',
-  },
-  {
-    label: '新榜海汇',
-    url: 'https://e.newrank.cn/feed/dashboard',
-  },
-  {
-    label: '有度',
-    url: 'https://in.newrank.cn',
-  },
-  {
-    label: 'TAPD',
-    url: 'https://www.tapd.cn/my_dashboard',
-  },
-  {
-    label: 'Gateway',
-    url: 'https://gateway.newrank.cn/document/nobusiness',
-  },
-  {
-    label: '阿里云',
-    url: 'https://code.aliyun.com/',
-  },
-  {
-    label: '个人语雀',
-    url: 'https://www.yuque.com/dashboard',
-  },
-  {
-    label: '团队语雀',
-    url: 'https://newrank.yuque.com/dashboard',
-    icon: newrankIcon,
-  },
-  {
-    label: '前端知识库',
-    url: 'https://newrank.yuque.com/nrcd/hpdymk/mco139',
-    icon: newrankIcon,
-  },
-  {
-    label: '有赚前端文档',
-    url: 'https://newrank.yuque.com/youzuan/cg9l7r/zhp3b5',
-    icon: newrankIcon,
+    icon: 'https://chs.newrank.cn/favicon/favicon.ico',
   },
   {
     label: 'Vite',
@@ -124,5 +95,21 @@ export const data = [
   {
     label: 'Echarts',
     url: 'https://echarts.apache.org/handbook/zh/get-started',
+  },
+  {
+    label: '新榜有赚',
+    url: 'https://a.newrank.cn/center/#/user/',
+  },
+  {
+    label: '新榜海汇',
+    url: 'https://e.newrank.cn/feed/dashboard',
+  },
+  {
+    label: '有度',
+    url: 'https://in.newrank.cn',
+  },
+  {
+    label: 'TAPD',
+    url: 'https://www.tapd.cn/my_dashboard',
   },
 ]
