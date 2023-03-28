@@ -1,12 +1,15 @@
-import React from "react";
+import React from 'react'
 import juejinIcon from './imgs/juejin.svg'
 import baiduIcon from './imgs/baidu.png'
 import githubIcon from './imgs/github.png'
 import newrankIcon from './imgs/newrank.png'
 import npmIcon from './imgs/npm.png'
 
-
 export const data = [
+  {
+    label: 'google',
+    url: 'https://www.google.com/?hl=zh-CN',
+  },
   {
     label: '百度',
     url: 'https://www.baidu.com',
